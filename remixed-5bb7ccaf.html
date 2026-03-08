@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WedVibe India — Apni Shaadi, Apna Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --marigold: #f5a623; --marigold-deep: #e8860a;
+  --magenta: #c0135a; --magenta-light: #e8336a;
+  --crimson: #8b1a2a; --royal: #4a1060; --royal-mid: #7a2090;
+  --teal: #0a7a78; --teal-light: #12a8a0;
+  --gold: #d4a017; --gold-bright: #f0c030; --saffron: #ff6b1a;
+  --ivory: #fdf6e8; --cream: #fef0d0; --ink: #1a0a14; --muted: #6a4a58;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Poppins', sans-serif; background: var(--ivory); color: var(--ink); overflow-x: hidden; cursor: none; }
+
+.cursor { width: 14px; height: 14px; background: var(--magenta); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+.cursor-ring { width: 38px; height: 38px; border: 2px solid var(--marigold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: transform 0.18s ease; opacity: 0.6; }
+
+.petals-container { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.petal { position: absolute; top: -60px; opacity: 0; animation: petalFall linear infinite; }
+.petal:nth-child(1){left:5%;animation-duration:7s;animation-delay:0s;font-size:1.2rem}
+.petal:nth-child(2){left:15%;animation-duration:9s;animation-delay:1s;font-size:1.4rem}
+.petal:nth-child(3){left:25%;animation-duration:6s;animation-delay:2s;font-size:1rem}
+.petal:nth-child(4){left:38%;animation-duration:11s;animation-delay:0.5s;font-size:1.4rem}
+.petal:nth-child(5){left:52%;animation-duration:8s;animation-delay:3s;font-size:1.6rem}
+.petal:nth-child(6){left:63%;animation-duration:7s;animation-delay:1.5s;font-size:1.4rem}
+.petal:nth-child(7){left:74%;animation-duration:10s;animation-delay:2.5s;font-size:1rem}
+.petal:nth-child(8){left:85%;animation-duration:9s;animation-delay:0.8s;font-size:1.4rem}
+.petal:nth-child(9){left:92%;animation-duration:6s;animation-delay:4s;font-size:1.3rem}
+.petal:nth-child(10){left:45%;animation-duration:12s;animation-delay:1.2s;font-size:1.8rem}
+@keyframes petalFall {
+  0%{top:-60px;opacity:0;transform:rotate(0deg) translateX(0)}
+  10%{opacity:0.8} 90%{opacity:0.6}
+  100%{top:110vh;opacity:0;transform:rotate(360deg) translateX(60px)}
+}
+
+nav { position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:linear-gradient(to bottom,rgba(253,246,232,0.98),rgba(253,246,232,0));backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,160,23,0.15); }
+.logo { font-family:'Dancing Script',cursive;font-size:2rem;color:var(--crimson);display:flex;align-items:center;gap:0.3rem; }
+.logo span { color:var(--marigold-deep); }
+.nav-links { display:flex;gap:2rem;list-style:none; }
+.nav-links a { font-size:0.8rem;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);text-decoration:none;transition:color 0.2s; }
+.nav-links a:hover { color:var(--magenta); }
+.nav-cta { padding:0.6rem 1.4rem;background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white!important;border-radius:100px;font-size:0.8rem;font-weight:600;box-shadow:0 4px 15px rgba(192,19,90,0.35);transition:transform 0.2s,box-shadow 0.2s; }
+.nav-cta:hover { transform:translateY(-2px);box-shadow:0 8px 25px rgba(192,19,90,0.45); }
+
+.hero { min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;padding:7rem 3rem 4rem; }
+.hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 75% 30%,rgba(245,166,35,0.25) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 20% 80%,rgba(192,19,90,0.2) 0%,transparent 55%),linear-gradient(160deg,#fdf6e8 0%,#fde8d0 30%,#fdd8d8 60%,#f8d0e8 100%); }
+.hero-border-top { position:absolute;top:80px;left:0;right:0;height:6px;background:linear-gradient(90deg,transparent,var(--marigold),var(--magenta),var(--royal),var(--teal),var(--marigold),transparent); }
+.hero-mandala { position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:55vw;max-width:700px;opacity:0.08;animation:rotateMandala 60s linear infinite;pointer-events:none; }
+@keyframes rotateMandala { from{transform:translateY(-50%) rotate(0deg)} to{transform:translateY(-50%) rotate(360deg)} }
+.hero-content { position:relative;z-index:2;max-width:620px; }
+.hero-flag { display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,rgba(245,166,35,0.15),rgba(192,19,90,0.1));border:1px solid rgba(245,166,35,0.4);border-radius:100px;padding:0.4rem 1rem;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--crimson);margin-bottom:1.8rem;animation:fadeUp 0.7s ease both; }
+.hero-title { font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);line-height:1.05;color:var(--ink);animation:fadeUp 0.7s 0.1s ease both;font-weight:900; }
+.hero-title .line2 { font-style:italic;font-weight:700;background:linear-gradient(135deg,var(--magenta),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.hero-title .line3 { color:var(--royal); }
+.hero-hindi { font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--marigold-deep);margin-top:0.5rem;animation:fadeUp 0.7s 0.15s ease both; }
+.hero-sub { font-size:1rem;line-height:1.8;color:var(--muted);margin-top:1.5rem;max-width:480px;font-weight:300;animation:fadeUp 0.7s 0.2s ease both; }
+.hero-actions { display:flex;align-items:center;gap:1.2rem;margin-top:2.5rem;animation:fadeUp 0.7s 0.3s ease both;flex-wrap:wrap; }
+.btn-primary { padding:1rem 2.2rem;background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white;font-weight:600;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:100px;box-shadow:0 6px 25px rgba(192,19,90,0.4);transition:transform 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;gap:0.5rem; }
+.btn-primary:hover { transform:translateY(-3px);box-shadow:0 12px 35px rgba(192,19,90,0.5); }
+.btn-secondary { padding:1rem 2rem;background:linear-gradient(135deg,var(--marigold),var(--marigold-deep));color:white;font-weight:600;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;border-radius:100px;box-shadow:0 6px 25px rgba(245,166,35,0.4);transition:transform 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;gap:0.5rem; }
+.btn-secondary:hover { transform:translateY(-3px);box-shadow:0 12px 35px rgba(245,166,35,0.5); }
+
+.marquee-strip { background:linear-gradient(90deg,var(--royal) 0%,var(--magenta) 30%,var(--marigold-deep) 60%,var(--teal) 85%,var(--royal) 100%);padding:0.9rem 0;overflow:hidden;white-space:nowrap;position:relative;z-index:5; }
+.marquee-track { display:inline-flex;animation:marquee 25s linear infinite; }
+.marquee-item { font-family:'Poppins',sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:0.1em;color:white;padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+.section { padding:5rem 3rem;position:relative; }
+.section-tag { display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--magenta);margin-bottom:0.8rem; }
+.section-tag::before,.section-tag::after { content:'◆';font-size:0.45rem;color:var(--marigold); }
+.section-title { font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;line-height:1.1;color:var(--ink); }
+.section-title .accent { font-style:italic;background:linear-gradient(135deg,var(--magenta),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.section-title .accent2 { font-style:italic;color:var(--gold-bright); }
+
+/* MOMENTS */
+.moments-section { background:linear-gradient(135deg,var(--royal) 0%,#2a0840 50%,var(--crimson) 100%);padding:4rem 0;overflow:hidden; }
+.moments-header { text-align:center;margin-bottom:2.5rem;padding:0 3rem; }
+.moments-title { font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);color:white;font-weight:700; }
+.moments-title span { font-style:italic;color:var(--gold-bright); }
+.moments-scroll { display:flex;gap:1.2rem;padding:0 3rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none; }
+.moments-scroll::-webkit-scrollbar { display:none; }
+.moment-card { flex-shrink:0;width:220px;height:300px;border-radius:20px;overflow:hidden;position:relative;scroll-snap-align:start;box-shadow:0 10px 40px rgba(0,0,0,0.4);transition:transform 0.3s; }
+.moment-card:hover { transform:scale(1.04) translateY(-6px); }
+.mc1{background:linear-gradient(160deg,#ff9a3c 0%,#e85020 40%,#c02810 100%)}
+.mc2{background:linear-gradient(160deg,#c060d8 0%,#8020a8 50%,#501880 100%)}
+.mc3{background:linear-gradient(160deg,#40c890 0%,#10a060 50%,#087040 100%)}
+.mc4{background:linear-gradient(160deg,#f0b030 0%,#c07810 50%,#904800 100%)}
+.mc5{background:linear-gradient(160deg,#e84870 0%,#c02050 50%,#800830 100%)}
+.mc6{background:linear-gradient(160deg,#3880c8 0%,#1050a0 50%,#083078 100%)}
+.mc7{background:linear-gradient(160deg,#e0a840 0%,#b07010 50%,#784000 100%)}
+.mc8{background:linear-gradient(160deg,#d05890 0%,#a02060 50%,#680840 100%)}
+.moment-bg-pattern { position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:20px 20px; }
+.moment-emoji { position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:4rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.3)); }
+.moment-info { position:absolute;bottom:0;left:0;right:0;padding:1.2rem;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 100%); }
+.moment-cat { font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:0.3rem; }
+.moment-name { font-family:'Playfair Display',serif;font-size:1rem;color:white;font-weight:700; }
+.moment-city { font-size:0.7rem;color:rgba(255,255,255,0.6);margin-top:0.2rem; }
+
+/* CATEGORIES */
+.categories-section { background:linear-gradient(160deg,#fff8ee 0%,#ffeedd 50%,#fff0f0 100%);position:relative;overflow:hidden; }
+.categories-section::before { content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(245,166,35,0.12) 0%,transparent 70%);border-radius:50%; }
+.categories-header { display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem; }
+.view-all-link { font-size:0.78rem;font-weight:600;color:var(--magenta);text-decoration:none;letter-spacing:0.06em;border-bottom:2px solid rgba(192,19,90,0.3);padding-bottom:2px;display:flex;align-items:center;gap:0.4rem;transition:gap 0.2s; }
+.view-all-link:hover { gap:0.8rem; }
+.categories-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:2; }
+.cat-card:first-child { grid-row:span 2; }
+.cat-card { border-radius:18px;overflow:hidden;position:relative;min-height:170px;padding:1.6rem;display:flex;flex-direction:column;justify-content:flex-end;cursor:none;text-decoration:none;color:white;transition:transform 0.3s cubic-bezier(0.23,1,0.32,1),box-shadow 0.3s; }
+.cat-card:first-child { min-height:360px; }
+.cat-card:hover { transform:translateY(-6px) scale(1.01); }
+.cc1{background:linear-gradient(160deg,#d44080 0%,#a01850 50%,#700030 100%);box-shadow:0 8px 30px rgba(160,24,80,0.35)}
+.cc2{background:linear-gradient(160deg,#e88020 0%,#c05000 50%,#903000 100%);box-shadow:0 8px 25px rgba(192,80,0,0.3)}
+.cc3{background:linear-gradient(160deg,#6030a8 0%,#401880 50%,#201058 100%);box-shadow:0 8px 25px rgba(64,24,128,0.35)}
+.cc4{background:linear-gradient(160deg,#0898a0 0%,#047070 50%,#024848 100%);box-shadow:0 8px 25px rgba(4,112,112,0.35)}
+.cc5{background:linear-gradient(160deg,#c83050 0%,#901030 50%,#600018 100%);box-shadow:0 8px 25px rgba(144,16,48,0.35)}
+.cc6{background:linear-gradient(160deg,#c88020 0%,#a05800 50%,#703000 100%);box-shadow:0 8px 25px rgba(160,88,0,0.3)}
+.cc7{background:linear-gradient(160deg,#2870c0 0%,#0848a0 50%,#023078 100%);box-shadow:0 8px 25px rgba(8,72,160,0.35)}
+.cc8{background:linear-gradient(160deg,#508840 0%,#306020 50%,#184000 100%);box-shadow:0 8px 25px rgba(48,96,32,0.35)}
+.cat-shimmer { position:absolute;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(255,255,255,0.15) 0%,transparent 60%); }
+.cat-pattern-overlay { position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 12px); }
+.cat-arrow-btn { position:absolute;top:1.2rem;right:1.2rem;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:white;z-index:2;transition:background 0.25s,transform 0.25s; }
+.cat-card:hover .cat-arrow-btn { background:white;color:var(--magenta);transform:rotate(45deg); }
+.cat-content { position:relative;z-index:2; }
+.cat-icon { font-size:2.4rem;margin-bottom:0.8rem;display:block;transition:transform 0.3s;filter:drop-shadow(0 3px 8px rgba(0,0,0,0.25)); }
+.cat-card:first-child .cat-icon { font-size:3.2rem; }
+.cat-card:hover .cat-icon { transform:scale(1.15) translateY(-3px); }
+.cat-name { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:0.4rem;line-height:1.1; }
+.cat-card:first-child .cat-name { font-size:1.9rem;margin-bottom:0.6rem; }
+.cat-desc-small { font-size:0.75rem;color:rgba(255,255,255,0.7);margin-bottom:0.6rem;line-height:1.5;display:none; }
+.cat-card:first-child .cat-desc-small { display:block; }
+.cat-pill { display:inline-flex;align-items:center;gap:0.3rem;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(4px);padding:0.2rem 0.6rem;border-radius:100px;font-size:0.68rem;font-weight:600;letter-spacing:0.08em;color:white; }
+
+/* VENDORS */
+.vendors-section { background:linear-gradient(160deg,#fdf0e8 0%,#fde8d8 50%,#fde8f0 100%);position:relative; }
+.vendors-section::before { content:'🌸';position:absolute;top:2rem;right:3rem;font-size:6rem;opacity:0.12;animation:floatBob 4s ease-in-out infinite;pointer-events:none; }
+@keyframes floatBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+/* CITY FILTER TABS */
+.city-filter { display:flex;gap:0.6rem;flex-wrap:wrap;margin:1.8rem 0; }
+.city-tab { padding:0.5rem 1.2rem;border-radius:100px;border:2px solid rgba(192,19,90,0.2);background:white;color:var(--muted);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Poppins',sans-serif; }
+.city-tab.active { background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white;border-color:transparent;box-shadow:0 4px 15px rgba(192,19,90,0.35); }
+.city-tab:hover:not(.active) { border-color:var(--magenta);color:var(--magenta); }
+
+.vendors-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem; }
+.vendor-card { background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(192,19,90,0.08);transition:transform 0.3s,box-shadow 0.3s,opacity 0.3s;cursor:none;border:1px solid rgba(212,160,23,0.15); }
+.vendor-card:hover { transform:translateY(-8px);box-shadow:0 20px 50px rgba(192,19,90,0.2); }
+.vendor-card.hidden { display:none; }
+.vendor-img { width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden; }
+.vi1{background:linear-gradient(135deg,#ffd0a0 0%,#ff9040 50%,#e06000 100%)}
+.vi2{background:linear-gradient(135deg,#e0b0f0 0%,#b060d8 50%,#7820a8 100%)}
+.vi3{background:linear-gradient(135deg,#a0d8a0 0%,#50a850 50%,#207820 100%)}
+.vi4{background:linear-gradient(135deg,#a0c8f8 0%,#4080d8 50%,#1040a0 100%)}
+.vi5{background:linear-gradient(135deg,#f8d0a0 0%,#e8a040 50%,#c06800 100%)}
+.vi-badge { position:absolute;top:1rem;left:1rem;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);color:var(--gold-bright);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:100px;border:1px solid rgba(212,160,23,0.4); }
+.vi-city-tag { position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.9);color:var(--magenta);font-size:0.65rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px; }
+.vendor-body { padding:1.3rem; }
+.vendor-tag { display:inline-flex;align-items:center;gap:0.3rem;background:rgba(192,19,90,0.08);color:var(--magenta);border:1px solid rgba(192,19,90,0.2);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:100px;margin-bottom:0.7rem; }
+.vendor-name { font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:0.3rem; }
+.vendor-meta { font-size:0.78rem;color:var(--muted);margin-bottom:0.8rem;display:flex;gap:0.8rem;align-items:center; }
+.stars { color:var(--marigold-deep);letter-spacing:-0.05em; }
+.vendor-desc { font-size:0.82rem;line-height:1.6;color:var(--muted);margin-bottom:1rem; }
+.vendor-footer { display:flex;justify-content:space-between;align-items:center;gap:0.5rem;flex-wrap:wrap; }
+.vendor-price { font-size:0.78rem;color:var(--muted); }
+.vendor-price strong { color:var(--ink);font-size:1.05rem;font-family:'Playfair Display',serif; }
+.vendor-actions { display:flex;gap:0.5rem; }
+.vendor-btn { padding:0.5rem 1rem;background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white;font-size:0.72rem;font-weight:600;letter-spacing:0.06em;border-radius:100px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 3px 12px rgba(192,19,90,0.35);border:none;cursor:pointer;font-family:'Poppins',sans-serif; }
+.vendor-btn:hover { transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,19,90,0.45); }
+.vendor-btn-outline { padding:0.5rem 1rem;background:transparent;color:var(--magenta);font-size:0.72rem;font-weight:600;letter-spacing:0.06em;border-radius:100px;text-decoration:none;border:2px solid rgba(192,19,90,0.3);cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s; }
+.vendor-btn-outline:hover { background:rgba(192,19,90,0.08);border-color:var(--magenta); }
+
+/* HOW IT WORKS */
+.how-section { background:linear-gradient(135deg,var(--royal) 0%,#2a0848 40%,var(--crimson) 100%);position:relative;overflow:hidden; }
+.how-section::before { content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:30px 30px; }
+.how-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;position:relative;z-index:2; }
+.how-step { background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background 0.3s,transform 0.3s; }
+.how-step:hover { background:rgba(255,255,255,0.12);transform:translateY(-4px); }
+.step-num { font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:rgba(255,255,255,0.06);position:absolute;top:1rem;right:1.5rem;line-height:1; }
+.step-icon-wrap { width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:1.2rem; }
+.si1{background:linear-gradient(135deg,rgba(245,166,35,0.3),rgba(245,166,35,0.1));border:1px solid rgba(245,166,35,0.3)}
+.si2{background:linear-gradient(135deg,rgba(192,19,90,0.3),rgba(192,19,90,0.1));border:1px solid rgba(192,19,90,0.3)}
+.si3{background:linear-gradient(135deg,rgba(18,168,160,0.3),rgba(18,168,160,0.1));border:1px solid rgba(18,168,160,0.3)}
+.si4{background:linear-gradient(135deg,rgba(212,160,23,0.3),rgba(212,160,23,0.1));border:1px solid rgba(212,160,23,0.3)}
+.step-title { font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;margin-bottom:0.6rem; }
+.step-desc { font-size:0.82rem;line-height:1.7;color:rgba(255,255,255,0.6); }
+
+/* MUSIC */
+.music-section { background:linear-gradient(135deg,#f0a020 0%,#e06010 30%,#c02050 60%,#800840 100%);padding:4rem 3rem;position:relative;overflow:hidden;text-align:center; }
+.music-section::before { content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:25px 25px; }
+.music-floating { position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none; }
+.music-note { position:absolute;font-size:2rem;opacity:0;animation:musicFloat 4s ease-in-out infinite; }
+.mn1{left:5%;top:20%;animation-delay:0s} .mn2{left:12%;top:60%;animation-delay:0.5s;font-size:1.5rem}
+.mn3{left:80%;top:15%;animation-delay:1s} .mn4{left:90%;top:55%;animation-delay:1.5s;font-size:1.5rem}
+.mn5{left:50%;top:10%;animation-delay:0.8s;font-size:1.8rem}
+@keyframes musicFloat { 0%{opacity:0;transform:translateY(0) scale(0.5)} 30%{opacity:0.7} 70%{opacity:0.5} 100%{opacity:0;transform:translateY(-60px) scale(1.2)} }
+.music-content { position:relative;z-index:2; }
+.music-title { font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:white;margin-bottom:0.8rem; }
+.music-title span { font-style:italic;color:var(--gold-bright); }
+.music-sub { font-size:1rem;color:rgba(255,255,255,0.8);margin-bottom:2rem; }
+.music-items { display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem; }
+.music-item { background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);border-radius:100px;padding:0.6rem 1.4rem;font-size:0.82rem;font-weight:600;color:white;display:flex;align-items:center;gap:0.5rem;transition:background 0.2s,transform 0.2s; }
+.music-item:hover { background:rgba(255,255,255,0.25);transform:scale(1.05); }
+
+/* TESTIMONIALS */
+.testi-section { background:linear-gradient(160deg,#fff5e8 0%,#ffeee0 40%,#fff0f5 100%);position:relative; }
+.deco-flower { position:absolute;font-size:3rem;opacity:0.15;animation:floatBob 6s ease-in-out infinite;pointer-events:none; }
+.df1{top:3rem;left:2rem;animation-delay:0s} .df2{top:2rem;right:4rem;animation-delay:1s;font-size:2rem}
+.df3{bottom:3rem;right:2rem;animation-delay:2s} .df4{bottom:4rem;left:6rem;animation-delay:0.5s;font-size:2.5rem}
+.testi-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.4rem;margin-top:2.5rem; }
+.testi-card { background:white;border-radius:20px;padding:2rem;box-shadow:0 4px 20px rgba(192,19,90,0.07);border:1px solid rgba(212,160,23,0.15);position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s; }
+.testi-card:hover { transform:translateY(-4px);box-shadow:0 12px 35px rgba(192,19,90,0.15); }
+.testi-card::before { content:'"';position:absolute;top:-0.5rem;left:1.2rem;font-family:'Playfair Display',serif;font-size:6rem;color:rgba(192,19,90,0.07);line-height:1; }
+.testi-top { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem; }
+.testi-stars { color:var(--marigold-deep);font-size:0.9rem; }
+.testi-city { font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:linear-gradient(135deg,var(--magenta),var(--marigold-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.testi-quote { font-family:'Playfair Display',serif;font-style:italic;font-size:0.95rem;line-height:1.7;color:var(--ink);margin-bottom:1.5rem;position:relative;z-index:1; }
+.testi-author { display:flex;align-items:center;gap:0.8rem; }
+.testi-avatar { width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0; }
+.ta1{background:linear-gradient(135deg,#ffd0d8,#ff90a8)}
+.ta2{background:linear-gradient(135deg,#d0e8ff,#80b8ff)}
+.ta3{background:linear-gradient(135deg,#ffd8a0,#ffb060)}
+.testi-name { font-weight:700;font-size:0.9rem;color:var(--ink); }
+.testi-wedding { font-size:0.72rem;color:var(--muted);margin-top:0.1rem; }
+
+/* FEEDBACK */
+.fb-input { width:100%;padding:0.85rem 1.1rem;border:1.5px solid rgba(192,19,90,0.18);border-radius:12px;font-family:'Poppins',sans-serif;font-size:0.9rem;color:var(--ink);outline:none;transition:border-color 0.2s; }
+.fb-input:focus { border-color:var(--magenta); }
+
+/* LEAD */
+.lead-section { background:linear-gradient(160deg,#fff8ee 0%,#ffeedd 40%,#fff0f5 100%);padding:6rem 3rem;text-align:center;position:relative;overflow:hidden; }
+.lf { position:absolute;font-size:3rem;opacity:0.12;pointer-events:none; }
+.lf1{top:2rem;left:3rem} .lf2{top:3rem;right:5rem;font-size:2rem}
+.lf3{bottom:2rem;left:8rem;font-size:2.5rem} .lf4{bottom:3rem;right:3rem}
+.lf5{top:50%;left:1rem;font-size:2rem} .lf6{top:40%;right:1rem;font-size:2rem}
+.lead-content { position:relative;z-index:2;max-width:580px;margin:0 auto; }
+.lead-badge { display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,rgba(192,19,90,0.1),rgba(245,166,35,0.1));border:1px solid rgba(192,19,90,0.2);border-radius:100px;padding:0.4rem 1.2rem;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--magenta);margin-bottom:1.5rem; }
+.lead-title { font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;color:var(--ink);line-height:1.1;margin-bottom:0.5rem; }
+.lead-title span { font-style:italic;background:linear-gradient(135deg,var(--magenta),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.lead-hindi { font-family:'Dancing Script',cursive;font-size:1.4rem;color:var(--marigold-deep);margin-bottom:1.2rem; }
+.lead-sub { font-size:1rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.7; }
+.lead-form { display:flex;max-width:480px;margin:0 auto;background:white;border-radius:100px;border:2px solid rgba(192,19,90,0.2);box-shadow:0 10px 40px rgba(192,19,90,0.15);overflow:hidden; }
+.lead-form input { flex:1;padding:1rem 1.5rem;border:none;background:transparent;font-family:'Poppins',sans-serif;font-size:0.9rem;color:var(--ink);outline:none; }
+.lead-form input::placeholder { color:var(--muted); }
+.lead-form button { padding:0.85rem 1.8rem;margin:4px;background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white;border:none;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;border-radius:100px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(192,19,90,0.4); }
+.lead-form button:hover { transform:scale(1.03);box-shadow:0 8px 25px rgba(192,19,90,0.5); }
+.lead-trust { display:flex;justify-content:center;gap:2rem;margin-top:2rem;flex-wrap:wrap; }
+.trust-item { display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--muted); }
+
+/* FOOTER */
+footer { background:linear-gradient(160deg,#1a0828 0%,#2a0838 40%,#1a0818 100%);padding:4rem 3rem 2rem;position:relative;overflow:hidden; }
+footer::before { content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--marigold),var(--magenta),var(--royal-mid),var(--teal-light),var(--marigold)); }
+.footer-top { display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);position:relative;z-index:2; }
+.footer-logo { font-family:'Dancing Script',cursive;font-size:2.2rem;color:white;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.3rem; }
+.footer-logo span { color:var(--marigold); }
+.footer-tagline { font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px; }
+.footer-social { display:flex;gap:0.8rem;margin-top:1.5rem; }
+.soc-btn { width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:background 0.2s,color 0.2s; }
+.soc-btn:hover { background:var(--magenta);color:white;border-color:var(--magenta); }
+.footer-col h4 { font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--marigold);margin-bottom:1.2rem;font-weight:700; }
+.footer-col a { display:block;font-size:0.82rem;color:rgba(255,255,255,0.4);text-decoration:none;margin-bottom:0.6rem;transition:color 0.2s; }
+.footer-col a:hover { color:rgba(255,255,255,0.85); }
+.footer-bottom { display:flex;justify-content:space-between;align-items:center;font-size:0.72rem;color:rgba(255,255,255,0.3);position:relative;z-index:2; }
+.footer-bottom-right { display:flex;gap:1.5rem; }
+.footer-bottom-right a { color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s; }
+
+/* ── WHATSAPP FLOATING BUTTON ── */
+.wa-float { position:fixed;bottom:2rem;right:2rem;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:0.6rem; }
+.wa-btn { width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c3e);box-shadow:0 6px 24px rgba(37,211,102,0.5);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.8rem;transition:transform 0.2s,box-shadow 0.2s;animation:waPulse 2.5s ease-in-out infinite; }
+.wa-btn:hover { transform:scale(1.1);box-shadow:0 10px 35px rgba(37,211,102,0.65); }
+@keyframes waPulse { 0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.5)} 50%{box-shadow:0 6px 35px rgba(37,211,102,0.8),0 0 0 10px rgba(37,211,102,0.1)} }
+.wa-tooltip { background:#1a0a14;color:white;font-size:0.75rem;font-weight:600;padding:0.4rem 0.9rem;border-radius:100px;white-space:nowrap;opacity:0;transform:translateX(10px);transition:all 0.2s;pointer-events:none; }
+.wa-float:hover .wa-tooltip { opacity:1;transform:translateX(0); }
+
+/* ── MODAL BASE ── */
+.modal-overlay { position:fixed;inset:0;background:rgba(26,10,20,0.75);backdrop-filter:blur(8px);z-index:900;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity 0.3s; }
+.modal-overlay.open { opacity:1;pointer-events:all; }
+.modal-box { background:white;border-radius:24px;padding:2.2rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(30px);transition:transform 0.3s;box-shadow:0 30px 80px rgba(0,0,0,0.3); }
+.modal-overlay.open .modal-box { transform:translateY(0); }
+.modal-close { position:absolute;top:1.2rem;right:1.2rem;width:32px;height:32px;border-radius:50%;background:#f0e8f0;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background 0.2s; }
+.modal-close:hover { background:var(--magenta);color:white; }
+.modal-title { font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:var(--ink);margin-bottom:0.3rem; }
+.modal-sub { font-size:0.82rem;color:var(--muted);margin-bottom:1.6rem; }
+.modal-label { font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.4rem;margin-top:1rem; }
+.modal-input { width:100%;padding:0.8rem 1rem;border:1.5px solid rgba(192,19,90,0.18);border-radius:12px;font-family:'Poppins',sans-serif;font-size:0.9rem;color:var(--ink);outline:none;transition:border-color 0.2s; }
+.modal-input:focus { border-color:var(--magenta); }
+.modal-submit { width:100%;margin-top:1.5rem;padding:1rem;background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white;border:none;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;box-shadow:0 6px 20px rgba(192,19,90,0.4);transition:transform 0.2s; }
+.modal-submit:hover { transform:translateY(-2px); }
+.modal-success { text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(32,160,96,0.08),rgba(16,120,64,0.04));border:1px solid rgba(32,160,96,0.2);border-radius:16px;margin-top:1rem;display:none; }
+
+/* QUOTE STEPS */
+.quote-steps { display:flex;gap:0.4rem;margin-bottom:1.6rem; }
+.q-step { flex:1;height:4px;border-radius:100px;background:#f0e0e8;transition:background 0.3s; }
+.q-step.done { background:linear-gradient(90deg,var(--magenta),var(--crimson)); }
+.quote-options { display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-top:0.5rem; }
+.q-opt { padding:0.8rem;border:2px solid rgba(192,19,90,0.15);border-radius:12px;text-align:center;cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--muted);transition:all 0.2s;background:white; }
+.q-opt:hover,.q-opt.selected { border-color:var(--magenta);color:var(--magenta);background:rgba(192,19,90,0.05); }
+.q-opt .q-icon { font-size:1.5rem;display:block;margin-bottom:0.3rem; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem} .nav-links{display:none}
+  .hero{padding:6rem 1.5rem 3rem}
+  .section{padding:3.5rem 1.5rem}
+  .categories-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-card:first-child{grid-row:span 1;min-height:200px}
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-bottom{flex-direction:column;gap:1rem}
+}
+@media(max-width:540px){
+  .categories-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .lead-form{flex-direction:column;border-radius:16px}
+  .lead-form button{border-radius:12px;margin:0}
+  .quote-options{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="petals-container">
+  <div class="petal">🌸</div><div class="petal">🌺</div><div class="petal">🏵️</div>
+  <div class="petal">🌸</div><div class="petal">💮</div><div class="petal">🌼</div>
+  <div class="petal">🌸</div><div class="petal">🌺</div><div class="petal">🏵️</div>
+  <div class="petal">🌸</div>
+</div>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<div class="wa-float">
+  <div class="wa-tooltip">💬 Chat with us on WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/916266396733?text=Hi%20WedVibe!%20I%27m%20planning%20my%20wedding%20and%20need%20help%20finding%20vendors%20🌸" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- VENDOR INQUIRY MODAL -->
+<div class="modal-overlay" id="inquiryModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('inquiryModal')">✕</button>
+    <div style="font-size:2rem;margin-bottom:0.5rem">📋</div>
+    <div class="modal-title">Send Inquiry</div>
+    <div class="modal-sub" id="inquiryVendorName">Get in touch with this vendor directly</div>
+    <label class="modal-label">Your Name *</label>
+    <input class="modal-input" id="iq-name" type="text" placeholder="e.g. Priya Sharma" />
+    <label class="modal-label">Phone Number *</label>
+    <input class="modal-input" id="iq-phone" type="tel" placeholder="e.g. +91 98765 43210" />
+    <label class="modal-label">Wedding Date</label>
+    <input class="modal-input" id="iq-date" type="date" />
+    <label class="modal-label">Your Message *</label>
+    <textarea class="modal-input" id="iq-msg" rows="3" placeholder="Tell the vendor about your requirements, guest count, venue, etc."></textarea>
+    <button class="modal-submit" onclick="submitInquiry()">🌸 Send Inquiry</button>
+    <div class="modal-success" id="iq-success">
+      <div style="font-size:2.2rem;margin-bottom:0.5rem">✅</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#107840">Inquiry Sent!</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">The vendor will contact you within 24 hours 🌸</div>
+    </div>
+  </div>
+</div>
+
+<!-- REQUEST A QUOTE MODAL -->
+<div class="modal-overlay" id="quoteModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('quoteModal')">✕</button>
+    <div style="font-size:2rem;margin-bottom:0.5rem">💰</div>
+    <div class="modal-title">Request a Quote</div>
+    <div class="modal-sub">Tell us about your wedding — we'll match you with the best vendors</div>
+    <div class="quote-steps">
+      <div class="q-step done" id="qs1"></div>
+      <div class="q-step" id="qs2"></div>
+      <div class="q-step" id="qs3"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div id="q-page1">
+      <div style="font-size:0.85rem;font-weight:600;color:var(--ink);margin-bottom:0.8rem">What do you need? (select all that apply)</div>
+      <div class="quote-options">
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">📸</span>Photography</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🌺</span>Mehendi</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🎶</span>Band / DJ</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">💄</span>Makeup</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🍛</span>Catering</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🪔</span>Décor</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🏛️</span>Venue</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🐴</span>Baraat</div>
+      </div>
+      <button class="modal-submit" onclick="quoteNext(2)" style="margin-top:1.2rem">Next →</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="q-page2" style="display:none">
+      <label class="modal-label">Wedding Date</label>
+      <input class="modal-input" id="q-date" type="date" />
+      <label class="modal-label">Approximate Guest Count</label>
+      <div class="quote-options" style="margin-top:0.5rem">
+        <div class="q-opt" onclick="selectGuest(this)">Under 100</div>
+        <div class="q-opt" onclick="selectGuest(this)">100–300</div>
+        <div class="q-opt" onclick="selectGuest(this)">300–600</div>
+        <div class="q-opt" onclick="selectGuest(this)">600+</div>
+      </div>
+      <label class="modal-label" style="margin-top:1rem">Your City</label>
+      <select class="modal-input" id="q-city">
+        <option value="">Select city...</option>
+        <option>Delhi NCR</option><option>Mumbai</option><option>Bangalore</option>
+        <option>Jaipur</option><option>Hyderabad</option><option>Chennai</option>
+        <option>Kolkata</option><option>Pune</option><option>Ahmedabad</option><option>Other</option>
+      </select>
+      <button class="modal-submit" onclick="quoteNext(3)">Next →</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="q-page3" style="display:none">
+      <label class="modal-label">Your Name *</label>
+      <input class="modal-input" id="q-name" type="text" placeholder="e.g. Priya & Rahul" />
+      <label class="modal-label">Phone Number *</label>
+      <input class="modal-input" id="q-phone" type="tel" placeholder="+91 98765 43210" />
+      <label class="modal-label">Email Address</label>
+      <input class="modal-input" id="q-email" type="email" placeholder="you@email.com" />
+      <label class="modal-label" style="margin-top:1rem">Budget Range</label>
+      <div class="quote-options">
+        <div class="q-opt" onclick="selectBudget(this)">Under ₹2L</div>
+        <div class="q-opt" onclick="selectBudget(this)">₹2L–5L</div>
+        <div class="q-opt" onclick="selectBudget(this)">₹5L–10L</div>
+        <div class="q-opt" onclick="selectBudget(this)">₹10L+</div>
+      </div>
+      <button class="modal-submit" onclick="submitQuote()" style="margin-top:1.2rem">🌸 Get My Quotes!</button>
+    </div>
+
+    <div class="modal-success" id="q-success">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem">🎉</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#107840">Quote Request Received!</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-top:0.4rem">Our team will send you personalised vendor quotes within 2 hours via WhatsApp & email 🌸</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">🪔 Wed<span>Vibe</span></div>
+  <ul class="nav-links">
+    <li><a href="#categories">Vendors</a></li>
+    <li><a href="#moments">Gallery</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#lead" class="nav-cta">Shaadi Shuru Karo ✨</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-border-top"></div>
+  <div class="hero-mandala">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="180" stroke="#c0135a" stroke-width="1" stroke-dasharray="4 4"/>
+      <circle cx="200" cy="200" r="150" stroke="#f5a623" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="120" stroke="#c0135a" stroke-width="1" stroke-dasharray="2 6"/>
+      <circle cx="200" cy="200" r="90" stroke="#f5a623" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="60" stroke="#c0135a" stroke-width="1"/>
+      <circle cx="200" cy="200" r="30" stroke="#f5a623" stroke-width="0.5"/>
+      <g stroke="#c0135a" stroke-width="0.7" opacity="0.8">
+        <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
+        <line x1="73" y1="73" x2="327" y2="327"/><line x1="327" y1="73" x2="73" y2="327"/>
+      </g>
+      <g fill="#f5a623" opacity="0.6">
+        <circle cx="200" cy="20" r="4"/><circle cx="200" cy="380" r="4"/>
+        <circle cx="20" cy="200" r="4"/><circle cx="380" cy="200" r="4"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-flag">🇮🇳 India's #1 Wedding Marketplace &nbsp;🌸</div>
+    <h1 class="hero-title">
+      <span>Har Shaadi</span><br>
+      <span class="line2">Khaas Honi</span><br>
+      <span class="line3">Chahiye</span>
+    </h1>
+    <div class="hero-hindi">हर शादी को यादगार बनाएं ✨</div>
+    <p class="hero-sub">From grand Rajputana palaces to intimate Sufi evenings — find verified vendors for Photography, Mehendi, Catering, Bands, Décor & more across India.</p>
+    <div class="hero-actions">
+      <a href="#vendors" class="btn-primary">🌺 Explore Vendors</a>
+      <button onclick="openModal('quoteModal')" class="btn-secondary" style="border:none;cursor:pointer">💰 Request a Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <div class="marquee-item">🌺 Mehendi Artists <span>◆</span></div>
+    <div class="marquee-item">📸 Photographers <span>◆</span></div>
+    <div class="marquee-item">🎶 Sangeet Bands <span>◆</span></div>
+    <div class="marquee-item">🏛️ Wedding Venues <span>◆</span></div>
+    <div class="marquee-item">🍛 Caterers <span>◆</span></div>
+    <div class="marquee-item">💄 Bridal Makeup <span>◆</span></div>
+    <div class="marquee-item">🎂 Wedding Cakes <span>◆</span></div>
+    <div class="marquee-item">🪔 Décor & Lighting <span>◆</span></div>
+    <div class="marquee-item">🐴 Baraat Services <span>◆</span></div>
+    <div class="marquee-item">💒 Pandit & Priests <span>◆</span></div>
+    <div class="marquee-item">🌺 Mehendi Artists <span>◆</span></div>
+    <div class="marquee-item">📸 Photographers <span>◆</span></div>
+    <div class="marquee-item">🎶 Sangeet Bands <span>◆</span></div>
+    <div class="marquee-item">🏛️ Wedding Venues <span>◆</span></div>
+    <div class="marquee-item">🍛 Caterers <span>◆</span></div>
+    <div class="marquee-item">💄 Bridal Makeup <span>◆</span></div>
+    <div class="marquee-item">🎂 Wedding Cakes <span>◆</span></div>
+    <div class="marquee-item">🪔 Décor & Lighting <span>◆</span></div>
+    <div class="marquee-item">🐴 Baraat Services <span>◆</span></div>
+    <div class="marquee-item">💒 Pandit & Priests <span>◆</span></div>
+  </div>
+</div>
+
+<!-- MOMENTS GALLERY -->
+<section class="moments-section" id="moments">
+  <div class="moments-header reveal">
+    <div class="section-tag" style="color:var(--gold-bright);justify-content:center">Our Wedding Stories</div>
+    <h2 class="moments-title">Real <span>Indian Weddings</span> We've Made Magical</h2>
+  </div>
+  <div class="moments-scroll" id="momentsScroll">
+    <div class="moment-card mc1"><div class="moment-bg-pattern"></div><div class="moment-emoji">👑</div><div class="moment-info"><div class="moment-cat">📍 Rajasthan</div><div class="moment-name">Royal Rajputana Wedding</div><div class="moment-city">Udaipur Palace · 500 guests</div></div></div>
+    <div class="moment-card mc2"><div class="moment-bg-pattern"></div><div class="moment-emoji">🌸</div><div class="moment-info"><div class="moment-cat">📍 Maharashtra</div><div class="moment-name">Romantic Marathi Shaadi</div><div class="moment-city">Pune · 200 guests</div></div></div>
+    <div class="moment-card mc3"><div class="moment-bg-pattern"></div><div class="moment-emoji">🎶</div><div class="moment-info"><div class="moment-cat">📍 Punjab</div><div class="moment-name">Dhamakedar Punjabi Wedding</div><div class="moment-city">Amritsar · 800 guests</div></div></div>
+    <div class="moment-card mc4"><div class="moment-bg-pattern"></div><div class="moment-emoji">🏵️</div><div class="moment-info"><div class="moment-cat">📍 Tamil Nadu</div><div class="moment-name">Beautiful Tamil Kalyanam</div><div class="moment-city">Chennai · 400 guests</div></div></div>
+    <div class="moment-card mc5"><div class="moment-bg-pattern"></div><div class="moment-emoji">🌺</div><div class="moment-info"><div class="moment-cat">📍 Kerala</div><div class="moment-name">Serene Kerala Vivah</div><div class="moment-city">Kochi Backwaters · 250 guests</div></div></div>
+    <div class="moment-card mc6"><div class="moment-bg-pattern"></div><div class="moment-emoji">💐</div><div class="moment-info"><div class="moment-cat">📍 Delhi</div><div class="moment-name">Grand Delhi Destination</div><div class="moment-city">Leela Palace · 600 guests</div></div></div>
+    <div class="moment-card mc7"><div class="moment-bg-pattern"></div><div class="moment-emoji">🪔</div><div class="moment-info"><div class="moment-cat">📍 Gujarat</div><div class="moment-name">Vibrant Gujarati Lagan</div><div class="moment-city">Ahmedabad · 700 guests</div></div></div>
+    <div class="moment-card mc8"><div class="moment-bg-pattern"></div><div class="moment-emoji">✨</div><div class="moment-info"><div class="moment-cat">📍 Bengaluru</div><div class="moment-name">Modern Kannada Wedding</div><div class="moment-city">Bengaluru · 350 guests</div></div></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories-section" id="categories">
+  <div class="categories-header">
+    <div>
+      <div class="section-tag">Browse by Category</div>
+      <h2 class="section-title">Sabhi Vendors<br>Ek <span class="accent">Jagah Par</span></h2>
+    </div>
+    <a href="#" class="view-all-link">Sab Dekho →</a>
+  </div>
+  <div class="categories-grid reveal">
+    <div class="cat-card cc1"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">📸</span><div class="cat-name">Photography & Video</div><p class="cat-desc-small">Capture every laugh, tear & dance — with India's finest wedding storytellers.</p><div class="cat-pill">✦ 148 vendors</div></div></div>
+    <div class="cat-card cc2"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🌺</span><div class="cat-name">Mehendi Artists</div><div class="cat-pill">✦ 96 vendors</div></div></div>
+    <div class="cat-card cc3"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🏛️</span><div class="cat-name">Venues & Banquets</div><div class="cat-pill">✦ 72 vendors</div></div></div>
+    <div class="cat-card cc4"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🍛</span><div class="cat-name">Catering & Food</div><div class="cat-pill">✦ 115 vendors</div></div></div>
+    <div class="cat-card cc5"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🎶</span><div class="cat-name">Bands & DJ</div><div class="cat-pill">✦ 84 vendors</div></div></div>
+    <div class="cat-card cc6"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">💄</span><div class="cat-name">Bridal Makeup</div><div class="cat-pill">✦ 103 vendors</div></div></div>
+    <div class="cat-card cc7"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🪔</span><div class="cat-name">Décor & Lighting</div><div class="cat-pill">✦ 79 vendors</div></div></div>
+    <div class="cat-card cc8"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🐴</span><div class="cat-name">Baraat & Transport</div><div class="cat-pill">✦ 41 vendors</div></div></div>
+  </div>
+</section>
+
+<!-- FEATURED VENDORS -->
+<section class="section vendors-section" id="vendors">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:0.5rem">
+    <div>
+      <div class="section-tag">Hand-Picked For You</div>
+      <h2 class="section-title">Top <span class="accent">Vendors</span> This Season</h2>
+    </div>
+    <button onclick="openModal('quoteModal')" class="btn-primary" style="border:none;cursor:pointer">💰 Request a Quote</button>
+  </div>
+
+  <!-- CITY FILTER TABS -->
+  <div class="city-filter">
+    <button class="city-tab active" onclick="filterCity('all',this)">🗺️ All Cities</button>
+    <button class="city-tab" onclick="filterCity('delhi',this)">🏛️ Delhi</button>
+    <button class="city-tab" onclick="filterCity('mumbai',this)">🌊 Mumbai</button>
+    <button class="city-tab" onclick="filterCity('bangalore',this)">🌿 Bangalore</button>
+    <button class="city-tab" onclick="filterCity('jaipur',this)">🏰 Jaipur</button>
+  </div>
+
+  <div class="vendors-grid" id="vendorsGrid">
+    <!-- Delhi -->
+    <div class="vendor-card reveal" data-city="delhi">
+      <div class="vendor-img vi1"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 0,transparent 20px)"></div><div class="vi-badge">⭐ Top Rated</div><div class="vi-city-tag">📍 Delhi</div><span style="position:relative;z-index:1;font-size:4rem">📸</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">📸 Photography</div>
+        <div class="vendor-name">Ravi Shankar Photography</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.9 · 312 reviews</span></div>
+        <p class="vendor-desc">Award-winning wedding photography across Delhi, Jaipur & Mumbai. Specialises in candid moments and cinematic reels.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹80,000</strong><br><span style="font-size:0.68rem">per full day</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Ravi Shankar Photography')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mumbai -->
+    <div class="vendor-card reveal" data-city="mumbai" style="transition-delay:0.1s">
+      <div class="vendor-img vi2"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 0,transparent 20px)"></div><div class="vi-badge">🔥 Most Booked</div><div class="vi-city-tag">📍 Mumbai</div><span style="position:relative;z-index:1;font-size:4rem">🌺</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🌺 Mehendi</div>
+        <div class="vendor-name">Sunita Mehendi Studio</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.8 · 289 reviews</span></div>
+        <p class="vendor-desc">Intricate bridal mehendi, Rajasthani & Arabic patterns. Serving brides across Mumbai & Pune since 2010.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹15,000</strong><br><span style="font-size:0.68rem">per bridal session</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Sunita Mehendi Studio')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jaipur -->
+    <div class="vendor-card reveal" data-city="jaipur" style="transition-delay:0.2s">
+      <div class="vendor-img vi3"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 0,transparent 20px)"></div><div class="vi-badge">🎖️ Premium</div><div class="vi-city-tag">📍 Jaipur</div><span style="position:relative;z-index:1;font-size:4rem">🎶</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🎶 Sangeet Band</div>
+        <div class="vendor-name">Dhol Dhamaka Band</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.9 · 406 reviews</span></div>
+        <p class="vendor-desc">Jaipur's most loved Baraat band. Dhol, trumpets, DJ & LED lights — we make your Baraat unforgettable!</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹45,000</strong><br><span style="font-size:0.68rem">per event</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Dhol Dhamaka Band')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bangalore -->
+    <div class="vendor-card reveal" data-city="bangalore" style="transition-delay:0.3s">
+      <div class="vendor-img vi4"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 0,transparent 20px)"></div><div class="vi-badge">✨ New</div><div class="vi-city-tag">📍 Bangalore</div><span style="position:relative;z-index:1;font-size:4rem">💄</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">💄 Bridal Makeup</div>
+        <div class="vendor-name">Priya Glam Studio</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.7 · 178 reviews</span></div>
+        <p class="vendor-desc">South India's top bridal makeup artist. Traditional & contemporary looks, airbrush finish, HD photography-ready.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹25,000</strong><br><span style="font-size:0.68rem">per bridal look</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Priya Glam Studio')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mumbai 2 -->
+    <div class="vendor-card reveal" data-city="mumbai" style="transition-delay:0.4s">
+      <div class="vendor-img vi5"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 0,transparent 20px)"></div><div class="vi-badge">🍛 Caterer</div><div class="vi-city-tag">📍 Mumbai</div><span style="position:relative;z-index:1;font-size:4rem">🍛</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🍛 Catering</div>
+        <div class="vendor-name">Grand Feast Caterers</div>
+        <div class="vendor-meta"><span class="stars">★★★★☆</span><span>4.6 · 234 reviews</span></div>
+        <p class="vendor-desc">Multi-cuisine wedding catering for 100–2000 guests. Rajasthani, Punjabi, South Indian & continental menus available.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹700</strong><br><span style="font-size:0.68rem">per plate</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Grand Feast Caterers')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Delhi 2 -->
+    <div class="vendor-card reveal" data-city="delhi" style="transition-delay:0.5s">
+      <div class="vendor-img vi2"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 0,transparent 20px)"></div><div class="vi-badge">🪔 Décor</div><div class="vi-city-tag">📍 Delhi</div><span style="position:relative;z-index:1;font-size:4rem">🪔</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🪔 Décor & Lighting</div>
+        <div class="vendor-name">Royal Décor Events</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.8 · 301 reviews</span></div>
+        <p class="vendor-desc">Luxury wedding décor, floral arrangements, LED lighting and stage design for grand Delhi weddings & farmhouses.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹1,20,000</strong><br><span style="font-size:0.68rem">full décor package</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Royal Décor Events')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section" id="how">
+  <div style="text-align:center">
+    <div class="section-tag" style="color:var(--gold-bright);justify-content:center;margin-bottom:0.5rem">Simple Process</div>
+    <h2 class="section-title" style="color:white;margin-bottom:3rem">Kaise Kaam <span class="accent2">Karta Hai?</span></h2>
+  </div>
+  <div class="how-grid reveal">
+    <div class="how-step"><div class="step-num">01</div><div class="step-icon-wrap si1">🔍</div><div class="step-title">Search & Filter</div><p class="step-desc">Browse by city, budget, category & language. Find vendors for Hindu, Muslim, Sikh, Christian — all traditions.</p></div>
+    <div class="how-step"><div class="step-num">02</div><div class="step-icon-wrap si2">💬</div><div class="step-title">Send Inquiry</div><p class="step-desc">Send a direct inquiry to any vendor with your name, phone, wedding date & requirements. No middlemen.</p></div>
+    <div class="how-step"><div class="step-num">03</div><div class="step-icon-wrap si3">✅</div><div class="step-title">Get Quotes</div><p class="step-desc">Receive personalised quotes from multiple vendors. Compare & choose the best fit for your budget.</p></div>
+    <div class="how-step"><div class="step-num">04</div><div class="step-icon-wrap si4">🎉</div><div class="step-title">Shaadi Celebrate!</div><p class="step-desc">Your dream team shows up. You show up. Everyone dances. Memories are made for a lifetime. 🕺💃</p></div>
+  </div>
+</section>
+
+<!-- MUSIC BANNER -->
+<section class="music-section">
+  <div class="music-floating">
+    <div class="music-note mn1">🎵</div><div class="music-note mn2">🎶</div>
+    <div class="music-note mn3">🎸</div><div class="music-note mn4">🥁</div>
+    <div class="music-note mn5">🎺</div>
+  </div>
+  <div class="music-content reveal">
+    <div class="section-tag" style="color:var(--gold-bright);justify-content:center;margin-bottom:1rem">🎶 Entertainment</div>
+    <h2 class="music-title">Sangeet Ki <span>Raat</span> Ho Dhamakedar!</h2>
+    <p class="music-sub">From Bollywood DJs to classical Shehnai — we have every musical vibe for your big night</p>
+    <div class="music-items">
+      <div class="music-item">🥁 Dhol Players</div>
+      <div class="music-item">🎷 Brass Bands</div>
+      <div class="music-item">🎧 Bollywood DJs</div>
+      <div class="music-item">🎻 Classical Strings</div>
+      <div class="music-item">🎤 Live Singers</div>
+      <div class="music-item">🪘 Folk Artists</div>
+    </div>
+    <button onclick="openModal('quoteModal')" class="btn-secondary" style="border:none;cursor:pointer">🎶 Get Entertainment Quotes</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-section">
+  <div class="deco-flower df1">🌸</div><div class="deco-flower df2">🌺</div>
+  <div class="deco-flower df3">🏵️</div><div class="deco-flower df4">💐</div>
+  <div style="text-align:center;margin-bottom:0.5rem">
+    <div class="section-tag" style="justify-content:center">Real Love Stories</div>
+    <h2 class="section-title">Unke Dil Ki <span class="accent">Baat</span></h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-stars">★★★★★</div><div class="testi-city">📍 Delhi</div></div>
+      <p class="testi-quote">"WedVibe ne hamari shaadi ko sapno jaisi bana diya! Photographer, mehendi wali aur caterer — sab ek hi jagah se mile. Itna aasaan tha!"</p>
+      <div class="testi-author"><div class="testi-avatar ta1">💍</div><div><div class="testi-name">Priya & Rahul Sharma</div><div class="testi-wedding">Married Jan 2025 · Delhi NCR · 450 guests</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-stars">★★★★★</div><div class="testi-city">📍 Mumbai</div></div>
+      <p class="testi-quote">"The vendors on WedVibe are absolutely top class! Our Sangeet was planned in 3 days and it was the highlight of our entire wedding week!"</p>
+      <div class="testi-author"><div class="testi-avatar ta2">🎶</div><div><div class="testi-name">Ananya & Vikram Mehta</div><div class="testi-wedding">Married Mar 2025 · Mumbai · 600 guests</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-stars">★★★★★</div><div class="testi-city">📍 Jaipur</div></div>
+      <p class="testi-quote">"Humne Udaipur mein destination wedding kiya aur WedVibe ke bina yeh possible nahi hota. Venue, catering, décor — sab perfect tha!"</p>
+      <div class="testi-author"><div class="testi-avatar ta3">🌺</div><div><div class="testi-name">Kavita & Arjun Singh</div><div class="testi-wedding">Married Feb 2025 · Udaipur · 800 guests</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK SECTION -->
+<section class="section" id="feedback" style="background:linear-gradient(160deg,#fff0f8 0%,#ffeedd 50%,#f8f0ff 100%);position:relative;overflow:hidden;">
+  <div style="position:absolute;top:2rem;right:3rem;font-size:5rem;opacity:0.1;pointer-events:none">💬</div>
+  <div style="text-align:center;margin-bottom:2.5rem">
+    <div class="section-tag" style="justify-content:center">Share Your Experience</div>
+    <h2 class="section-title">Apna <span class="accent">Feedback</span> Dijiye</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Your feedback helps us serve every couple better 🌸</p>
+  </div>
+  <div style="max-width:620px;margin:0 auto;background:white;border-radius:24px;padding:2.5rem;box-shadow:0 10px 50px rgba(192,19,90,0.12);border:1px solid rgba(212,160,23,0.15)" class="reveal">
+    <div style="margin-bottom:1.8rem">
+      <label style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.8rem">Rate Your Experience</label>
+      <div id="starRow" style="display:flex;gap:0.5rem">
+        <span class="star-btn" data-val="1" style="font-size:2.2rem;cursor:pointer;transition:transform 0.2s">☆</span>
+        <span class="star-btn" data-val="2" style="font-size:2.2rem;cursor:pointer;transition:transform 0.2s">☆</span>
+        <span class="star-btn" data-val="3" style="font-size:2.2rem;cursor:pointer;transition:transform 0.2s">☆</span>
+        <span class="star-btn" data-val="4" style="font-size:2.2rem;cursor:pointer;transition:transform 0.2s">☆</span>
+        <span class="star-btn" data-val="5" style="font-size:2.2rem;cursor:pointer;transition:transform 0.2s">☆</span>
+      </div>
+    </div>
+    <div style="margin-bottom:1.2rem">
+      <label style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem">Your Name</label>
+      <input id="fbName" type="text" placeholder="e.g. Priya & Rahul" class="fb-input"/>
+    </div>
+    <div style="margin-bottom:1.2rem">
+      <label style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem">Your City</label>
+      <input id="fbCity" type="text" placeholder="e.g. Delhi, Mumbai, Jaipur..." class="fb-input"/>
+    </div>
+    <div style="margin-bottom:1.8rem">
+      <label style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.5rem">Your Feedback</label>
+      <textarea id="fbMsg" rows="4" placeholder="Tell us about your experience — what did you love? What can we improve?" class="fb-input"></textarea>
+    </div>
+    <button id="fbSubmit" style="width:100%;padding:1rem;background:linear-gradient(135deg,var(--magenta),var(--crimson));color:white;border:none;border-radius:100px;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.06em;cursor:pointer;box-shadow:0 6px 25px rgba(192,19,90,0.4);">
+      🌸 Submit Feedback
+    </button>
+    <div id="fbSuccess" style="display:none;text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(32,160,96,0.1),rgba(16,120,64,0.05));border:1px solid rgba(32,160,96,0.25);border-radius:16px;margin-top:1.2rem">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem">🎉</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#107840;margin-bottom:0.3rem">Shukriya! Bahut Bahut Dhanyavaad!</div>
+      <div style="font-size:0.85rem;color:var(--muted)">Your feedback has been recorded 🌸</div>
+    </div>
+    <div id="fbList" style="margin-top:2rem"></div>
+  </div>
+</section>
+
+<!-- LEAD CAPTURE -->
+<section class="lead-section" id="lead">
+  <div class="lf lf1">🌺</div><div class="lf lf2">🌸</div>
+  <div class="lf lf3">🏵️</div><div class="lf lf4">💐</div>
+  <div class="lf lf5">🌼</div><div class="lf lf6">🌸</div>
+  <div class="lead-content reveal">
+    <div class="lead-badge">🪔 Shaadi Ki Taiyari Shuru Karo</div>
+    <h2 class="lead-title">Apni <span>Sapno Ki</span> Shaadi</h2>
+    <div class="lead-hindi">अपनी शादी को यादगार बनाएं 💍</div>
+    <p class="lead-sub">Join thousands of couples across India who planned their perfect wedding with WedVibe. Free to browse, free to connect.</p>
+    <!-- Brevo/Sendinblue embed form -->
+    <div class="lead-form" id="leadFormWrap">
+      <input type="email" id="leadEmail" placeholder="📧 Apna email dalein..." />
+      <button type="button" id="leadBtn">Shuru Karo! 🌸</button>
+    </div>
+    <div id="leadSuccess" style="display:none;margin-top:1rem;padding:1rem 1.5rem;background:linear-gradient(135deg,rgba(32,160,96,0.1),rgba(16,120,64,0.05));border:1px solid rgba(32,160,96,0.25);border-radius:100px;font-size:0.85rem;font-weight:600;color:#107840;">
+      🎉 Welcome to the WedVibe family! Check your email 🌸
+    </div>
+    <div class="lead-trust" style="margin-top:1.5rem">
+      <div class="trust-item">✅ 100% Free</div>
+      <div class="trust-item">🔒 Secure & Private</div>
+      <div class="trust-item">💬 WhatsApp Support</div>
+      <div class="trust-item">⭐ 4.9 Star Rated</div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--muted);margin-top:1rem;opacity:0.7">
+      📌 To connect this form to <strong>Brevo</strong>: Create a free account at brevo.com → Contacts → Forms → Copy your list ID → Replace <code>YOUR_BREVO_LIST_ID</code> in the script below with your ID.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">🪔 Wed<span>Vibe</span></div>
+      <p class="footer-tagline">India's boldest wedding vendor marketplace. Apni shaadi ko yadgaar banao — from Kashmir to Kanyakumari. 🇮🇳</p>
+      <div class="footer-social">
+        <a class="soc-btn" href="#">in</a><a class="soc-btn" href="#">ig</a>
+        <a class="soc-btn" href="#">fb</a><a class="soc-btn" href="#">yt</a><a class="soc-btn" href="#">𝕏</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Vendors</h4>
+      <a href="#">Photography</a><a href="#">Mehendi Artists</a>
+      <a href="#">Venues & Banquets</a><a href="#">Catering</a>
+      <a href="#">Bands & DJ</a><a href="#">Bridal Makeup</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About WedVibe</a><a href="#">How It Works</a>
+      <a href="#">Blog</a><a href="#">Careers</a><a href="#">Press</a>
+    </div>
+    <div class="footer-col">
+      <h4>For Vendors</h4>
+      <a href="#">List Your Business</a><a href="#">Vendor Login</a>
+      <a href="#">Pricing Plans</a><a href="#">Help Center</a>
+      <a href="https://wa.me/916266396733" target="_blank">WhatsApp Us 💬</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 WedVibe India. Made with ❤️ for Indian Weddings 🇮🇳</span>
+    <div class="footer-bottom-right">
+      <a href="#">Privacy Policy</a><a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function move(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(move);})();
+document.querySelectorAll('a,button,.cat-card,.vendor-card,.music-item,.city-tab').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2)';ring.style.transform='translate(-50%,-50%) scale(1.5)';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';});
+});
+
+// ── MODALS ──
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',function(e){if(e.target===this)closeModal(this.id);}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(o=>closeModal(o.id));});
+
+// ── INQUIRY MODAL ──
+function openInquiry(vendorName){
+  document.getElementById('inquiryVendorName').textContent='Sending inquiry to: '+vendorName;
+  document.getElementById('inquiryModal').dataset.vendor=vendorName;
+  document.getElementById('iq-success').style.display='none';
+  document.querySelector('#inquiryModal .modal-submit').style.display='block';
+  openModal('inquiryModal');
+}
+function submitInquiry(){
+  const name=document.getElementById('iq-name').value.trim();
+  const phone=document.getElementById('iq-phone').value.trim();
+  const msg=document.getElementById('iq-msg').value.trim();
+  if(!name||!phone||!msg){alert('Please fill in Name, Phone & Message ✍️');return;}
+  // Save to storage
+  const entry={vendor:document.getElementById('inquiryModal').dataset.vendor,name,phone,date:document.getElementById('iq-date').value,msg,ts:Date.now()};
+  window.storage&&window.storage.set('inq:'+Date.now(),JSON.stringify(entry),true).catch(()=>{});
+  document.getElementById('iq-success').style.display='block';
+  document.querySelector('#inquiryModal .modal-submit').style.display='none';
+  ['iq-name','iq-phone','iq-msg'].forEach(id=>document.getElementById(id).value='');
+  setTimeout(()=>closeModal('inquiryModal'),3000);
+}
+
+// ── QUOTE MODAL ──
+let qPage=1;
+function quoteNext(page){
+  document.getElementById('q-page'+(page-1)).style.display='none';
+  document.getElementById('q-page'+page).style.display='block';
+  qPage=page;
+  for(let i=1;i<=3;i++) document.getElementById('qs'+i).classList.toggle('done',i<=page);
+}
+function toggleOpt(el){el.classList.toggle('selected');}
+function selectGuest(el){document.querySelectorAll('#q-page2 .quote-options .q-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');}
+function selectBudget(el){document.querySelectorAll('#q-page3 .quote-options .q-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');}
+function submitQuote(){
+  const name=document.getElementById('q-name').value.trim();
+  const phone=document.getElementById('q-phone').value.trim();
+  if(!name||!phone){alert('Please fill in your name and phone number 🌸');return;}
+  const services=[...document.querySelectorAll('#q-page1 .q-opt.selected')].map(o=>o.textContent.trim()).join(', ');
+  const guest=(document.querySelector('#q-page2 .q-opt.selected')||{}).textContent||'';
+  const budget=(document.querySelector('#q-page3 .q-opt.selected')||{}).textContent||'';
+  const entry={name,phone,email:document.getElementById('q-email').value,city:document.getElementById('q-city').value,date:document.getElementById('q-date').value,services,guest,budget,ts:Date.now()};
+  window.storage&&window.storage.set('quote:'+Date.now(),JSON.stringify(entry),true).catch(()=>{});
+  ['q-page1','q-page2','q-page3'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('q-success').style.display='block';
+  setTimeout(()=>{closeModal('quoteModal');resetQuote();},4000);
+}
+function resetQuote(){
+  qPage=1;
+  document.getElementById('q-page1').style.display='block';
+  document.getElementById('q-page2').style.display='none';
+  document.getElementById('q-page3').style.display='none';
+  document.getElementById('q-success').style.display='none';
+  document.querySelectorAll('.q-opt').forEach(o=>o.classList.remove('selected'));
+  for(let i=1;i<=3;i++) document.getElementById('qs'+i).classList.toggle('done',i===1);
+}
+
+// ── CITY FILTER ──
+function filterCity(city,btn){
+  document.querySelectorAll('.city-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.vendor-card').forEach(card=>{
+    const match=city==='all'||card.dataset.city===city;
+    card.classList.toggle('hidden',!match);
+  });
+}
+
+// ── LEAD FORM (Brevo integration) ──
+document.getElementById('leadBtn').addEventListener('click',async function(){
+  const email=document.getElementById('leadEmail').value.trim();
+  if(!email||!email.includes('@')){
+    document.getElementById('leadEmail').style.outline='2px solid var(--magenta)';
+    setTimeout(()=>document.getElementById('leadEmail').style.outline='',1500);
+    return;
+  }
+  this.textContent='Saving... 🌸';
+  this.disabled=true;
+  // Brevo API — replace YOUR_BREVO_API_KEY and YOUR_LIST_ID with your actual values from brevo.com
+  const BREVO_API_KEY='YOUR_BREVO_API_KEY'; // Add your Brevo API key here
+  const LIST_ID=3; // Replace with your Brevo list ID
+  try {
+    await fetch('https://api.brevo.com/v3/contacts',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','api-key':BREVO_API_KEY},
+      body:JSON.stringify({email,listIds:[LIST_ID],updateEnabled:true,attributes:{EMAIL_TO:'Wedvibe@zohomail.com'}})
+    });
+    // Also send notification email to WedVibe
+    await fetch('https://api.brevo.com/v3/smtp/email',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','api-key':BREVO_API_KEY},
+      body:JSON.stringify({sender:{name:'WedVibe Website',email:'Wedvibe@zohomail.com'},to:[{email:'Wedvibe@zohomail.com',name:'WedVibe Team'}],subject:'🌸 New Lead from WedVibe Website',htmlContent:`<h2>New Email Signup</h2><p><b>Email:</b> ${email}</p><p><b>Time:</b> ${new Date().toLocaleString('en-IN')}</p>`})
+    });
+  } catch(e){}
+  // Save locally too
+  window.storage&&window.storage.set('lead:'+Date.now(),JSON.stringify({email,ts:Date.now()}),true).catch(()=>{});
+  document.getElementById('leadFormWrap').style.display='none';
+  document.getElementById('leadSuccess').style.display='block';
+});
+
+// ── FEEDBACK ──
+let selectedRating=0;
+const stars=document.querySelectorAll('.star-btn');
+stars.forEach(s=>{
+  s.addEventListener('mouseenter',()=>highlightStars(+s.dataset.val));
+  s.addEventListener('mouseleave',()=>highlightStars(selectedRating));
+  s.addEventListener('click',()=>{selectedRating=+s.dataset.val;highlightStars(selectedRating);});
+});
+function highlightStars(n){stars.forEach(s=>{const v=+s.dataset.val;s.textContent=v<=n?'★':'☆';s.style.color=v<=n?'var(--marigold-deep)':'#ccc';s.style.transform=v<=n?'scale(1.2)':'scale(1)';});}
+
+async function loadFeedbacks(){
+  try{
+    const res=await window.storage.list('fb:');
+    if(!res||!res.keys.length)return;
+    const items=await Promise.all(res.keys.map(k=>window.storage.get(k,true).catch(()=>null)));
+    const valid=items.filter(Boolean).map(i=>JSON.parse(i.value)).sort((a,b)=>b.ts-a.ts);
+    renderFeedbacks(valid);
+  }catch(e){}
+}
+function renderFeedbacks(list){
+  const el=document.getElementById('fbList');
+  if(!list.length){el.innerHTML='';return;}
+  el.innerHTML=`<div style="border-top:1px solid rgba(212,160,23,0.2);padding-top:1.5rem"><div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Recent Feedback (${list.length})</div>${list.slice(0,6).map(f=>`<div style="background:linear-gradient(135deg,rgba(245,166,35,0.05),rgba(192,19,90,0.04));border:1px solid rgba(212,160,23,0.15);border-radius:14px;padding:1rem 1.2rem;margin-bottom:0.8rem"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem"><span style="font-weight:700;font-size:0.88rem">${f.name||'Anonymous'}${f.city?' · <span style="color:var(--magenta);font-size:0.78rem">📍'+f.city+'</span>':''}</span><span style="color:var(--marigold-deep)">${'★'.repeat(f.rating)}${'☆'.repeat(5-f.rating)}</span></div><p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin:0">${f.msg}</p><div style="font-size:0.68rem;color:rgba(0,0,0,0.3);margin-top:0.4rem">${new Date(f.ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div></div>`).join('')}</div>`;
+}
+document.getElementById('fbSubmit').addEventListener('click',async function(){
+  const name=document.getElementById('fbName').value.trim();
+  const city=document.getElementById('fbCity').value.trim();
+  const msg=document.getElementById('fbMsg').value.trim();
+  if(!selectedRating){alert('Please select a star rating! ⭐');return;}
+  if(!msg){document.getElementById('fbMsg').style.borderColor='var(--magenta)';return;}
+  const entry={name,city,msg,rating:selectedRating,ts:Date.now()};
+  window.storage&&window.storage.set('fb:'+Date.now(),JSON.stringify(entry),true).catch(()=>{});
+  document.getElementById('fbSuccess').style.display='block';
+  this.style.display='none';
+  document.getElementById('fbName').value='';
+  document.getElementById('fbCity').value='';
+  document.getElementById('fbMsg').value='';
+  selectedRating=0;highlightStars(0);
+  setTimeout(()=>{document.getElementById('fbSuccess').style.display='none';this.style.display='block';},4000);
+  loadFeedbacks();
+});
+loadFeedbacks();
+
+// ── SCROLL REVEAL ──
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ── AUTO SCROLL GALLERY ──
+const scroll=document.getElementById('momentsScroll');
+if(scroll){
+  let scrolling=true;
+  setInterval(()=>{if(scrolling){scroll.scrollLeft+=1.2;if(scroll.scrollLeft>=scroll.scrollWidth-scroll.clientWidth)scroll.scrollLeft=0;}},20);
+  scroll.addEventListener('mouseenter',()=>scrolling=false);
+  scroll.addEventListener('mouseleave',()=>scrolling=true);
+}
+</script>
+</body>
+</html>
