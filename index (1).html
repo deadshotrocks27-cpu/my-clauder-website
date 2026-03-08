@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WedVibe India — Apni Shaadi, Apna Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="petals-container">
+  <div class="petal">🌸</div><div class="petal">🌺</div><div class="petal">🏵️</div>
+  <div class="petal">🌸</div><div class="petal">💮</div><div class="petal">🌼</div>
+  <div class="petal">🌸</div><div class="petal">🌺</div><div class="petal">🏵️</div>
+  <div class="petal">🌸</div>
+</div>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<div class="wa-float">
+  <div class="wa-tooltip">💬 Chat with us on WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/916266396733?text=Hi%20WedVibe!%20I%27m%20planning%20my%20wedding%20and%20need%20help%20finding%20vendors%20🌸" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- VENDOR INQUIRY MODAL -->
+<div class="modal-overlay" id="inquiryModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('inquiryModal')">✕</button>
+    <div style="font-size:2rem;margin-bottom:0.5rem">📋</div>
+    <div class="modal-title">Send Inquiry</div>
+    <div class="modal-sub" id="inquiryVendorName">Get in touch with this vendor directly</div>
+    <label class="modal-label">Your Name *</label>
+    <input class="modal-input" id="iq-name" type="text" placeholder="e.g. Priya Sharma" />
+    <label class="modal-label">Phone Number *</label>
+    <input class="modal-input" id="iq-phone" type="tel" placeholder="e.g. +91 98765 43210" />
+    <label class="modal-label">Wedding Date</label>
+    <input class="modal-input" id="iq-date" type="date" />
+    <label class="modal-label">Your Message *</label>
+    <textarea class="modal-input" id="iq-msg" rows="3" placeholder="Tell the vendor about your requirements, guest count, venue, etc."></textarea>
+    <button class="modal-submit" onclick="submitInquiry()">🌸 Send Inquiry</button>
+    <div class="modal-success" id="iq-success">
+      <div style="font-size:2.2rem;margin-bottom:0.5rem">✅</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#107840">Inquiry Sent!</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">The vendor will contact you within 24 hours 🌸</div>
+    </div>
+  </div>
+</div>
+
+<!-- REQUEST A QUOTE MODAL -->
+<div class="modal-overlay" id="quoteModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('quoteModal')">✕</button>
+    <div style="font-size:2rem;margin-bottom:0.5rem">💰</div>
+    <div class="modal-title">Request a Quote</div>
+    <div class="modal-sub">Tell us about your wedding — we'll match you with the best vendors</div>
+    <div class="quote-steps">
+      <div class="q-step done" id="qs1"></div>
+      <div class="q-step" id="qs2"></div>
+      <div class="q-step" id="qs3"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div id="q-page1">
+      <div style="font-size:0.85rem;font-weight:600;color:var(--ink);margin-bottom:0.8rem">What do you need? (select all that apply)</div>
+      <div class="quote-options">
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">📸</span>Photography</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🌺</span>Mehendi</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🎶</span>Band / DJ</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">💄</span>Makeup</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🍛</span>Catering</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🪔</span>Décor</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🏛️</span>Venue</div>
+        <div class="q-opt" onclick="toggleOpt(this)"><span class="q-icon">🐴</span>Baraat</div>
+      </div>
+      <button class="modal-submit" onclick="quoteNext(2)" style="margin-top:1.2rem">Next →</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="q-page2" style="display:none">
+      <label class="modal-label">Wedding Date</label>
+      <input class="modal-input" id="q-date" type="date" />
+      <label class="modal-label">Approximate Guest Count</label>
+      <div class="quote-options" style="margin-top:0.5rem">
+        <div class="q-opt" onclick="selectGuest(this)">Under 100</div>
+        <div class="q-opt" onclick="selectGuest(this)">100–300</div>
+        <div class="q-opt" onclick="selectGuest(this)">300–600</div>
+        <div class="q-opt" onclick="selectGuest(this)">600+</div>
+      </div>
+      <label class="modal-label" style="margin-top:1rem">Your City</label>
+      <select class="modal-input" id="q-city">
+        <option value="">Select city...</option>
+        <option>Delhi NCR</option><option>Mumbai</option><option>Bangalore</option>
+        <option>Jaipur</option><option>Hyderabad</option><option>Chennai</option>
+        <option>Kolkata</option><option>Pune</option><option>Ahmedabad</option><option>Other</option>
+      </select>
+      <button class="modal-submit" onclick="quoteNext(3)">Next →</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="q-page3" style="display:none">
+      <label class="modal-label">Your Name *</label>
+      <input class="modal-input" id="q-name" type="text" placeholder="e.g. Priya & Rahul" />
+      <label class="modal-label">Phone Number *</label>
+      <input class="modal-input" id="q-phone" type="tel" placeholder="+91 98765 43210" />
+      <label class="modal-label">Email Address</label>
+      <input class="modal-input" id="q-email" type="email" placeholder="you@email.com" />
+      <label class="modal-label" style="margin-top:1rem">Budget Range</label>
+      <div class="quote-options">
+        <div class="q-opt" onclick="selectBudget(this)">Under ₹2L</div>
+        <div class="q-opt" onclick="selectBudget(this)">₹2L–5L</div>
+        <div class="q-opt" onclick="selectBudget(this)">₹5L–10L</div>
+        <div class="q-opt" onclick="selectBudget(this)">₹10L+</div>
+      </div>
+      <button class="modal-submit" onclick="submitQuote()" style="margin-top:1.2rem">🌸 Get My Quotes!</button>
+    </div>
+
+    <div class="modal-success" id="q-success">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem">🎉</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#107840">Quote Request Received!</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-top:0.4rem">Our team will send you personalised vendor quotes within 2 hours via WhatsApp & email 🌸</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">🪔 Wed<span>Vibe</span></div>
+  <ul class="nav-links">
+    <li><a href="#categories">Vendors</a></li>
+    <li><a href="#moments">Gallery</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#lead" class="nav-cta">Shaadi Shuru Karo ✨</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-border-top"></div>
+  <div class="hero-mandala">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="180" stroke="#c0135a" stroke-width="1" stroke-dasharray="4 4"/>
+      <circle cx="200" cy="200" r="150" stroke="#f5a623" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="120" stroke="#c0135a" stroke-width="1" stroke-dasharray="2 6"/>
+      <circle cx="200" cy="200" r="90" stroke="#f5a623" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="60" stroke="#c0135a" stroke-width="1"/>
+      <circle cx="200" cy="200" r="30" stroke="#f5a623" stroke-width="0.5"/>
+      <g stroke="#c0135a" stroke-width="0.7" opacity="0.8">
+        <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
+        <line x1="73" y1="73" x2="327" y2="327"/><line x1="327" y1="73" x2="73" y2="327"/>
+      </g>
+      <g fill="#f5a623" opacity="0.6">
+        <circle cx="200" cy="20" r="4"/><circle cx="200" cy="380" r="4"/>
+        <circle cx="20" cy="200" r="4"/><circle cx="380" cy="200" r="4"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-flag">🇮🇳 India's #1 Wedding Marketplace &nbsp;🌸</div>
+    <h1 class="hero-title">
+      <span>Har Shaadi</span><br>
+      <span class="line2">Khaas Honi</span><br>
+      <span class="line3">Chahiye</span>
+    </h1>
+    <div class="hero-hindi">हर शादी को यादगार बनाएं ✨</div>
+    <p class="hero-sub">From grand Rajputana palaces to intimate Sufi evenings — find verified vendors for Photography, Mehendi, Catering, Bands, Décor & more across India.</p>
+    <div class="hero-actions">
+      <a href="#vendors" class="btn-primary">🌺 Explore Vendors</a>
+      <button onclick="openModal('quoteModal')" class="btn-secondary" style="border:none;cursor:pointer">💰 Request a Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <div class="marquee-item">🌺 Mehendi Artists <span>◆</span></div>
+    <div class="marquee-item">📸 Photographers <span>◆</span></div>
+    <div class="marquee-item">🎶 Sangeet Bands <span>◆</span></div>
+    <div class="marquee-item">🏛️ Wedding Venues <span>◆</span></div>
+    <div class="marquee-item">🍛 Caterers <span>◆</span></div>
+    <div class="marquee-item">💄 Bridal Makeup <span>◆</span></div>
+    <div class="marquee-item">🎂 Wedding Cakes <span>◆</span></div>
+    <div class="marquee-item">🪔 Décor & Lighting <span>◆</span></div>
+    <div class="marquee-item">🐴 Baraat Services <span>◆</span></div>
+    <div class="marquee-item">💒 Pandit & Priests <span>◆</span></div>
+    <div class="marquee-item">🌺 Mehendi Artists <span>◆</span></div>
+    <div class="marquee-item">📸 Photographers <span>◆</span></div>
+    <div class="marquee-item">🎶 Sangeet Bands <span>◆</span></div>
+    <div class="marquee-item">🏛️ Wedding Venues <span>◆</span></div>
+    <div class="marquee-item">🍛 Caterers <span>◆</span></div>
+    <div class="marquee-item">💄 Bridal Makeup <span>◆</span></div>
+    <div class="marquee-item">🎂 Wedding Cakes <span>◆</span></div>
+    <div class="marquee-item">🪔 Décor & Lighting <span>◆</span></div>
+    <div class="marquee-item">🐴 Baraat Services <span>◆</span></div>
+    <div class="marquee-item">💒 Pandit & Priests <span>◆</span></div>
+  </div>
+</div>
+
+<!-- MOMENTS GALLERY -->
+<section class="moments-section" id="moments">
+  <div class="moments-header reveal">
+    <div class="section-tag" style="color:var(--gold-bright);justify-content:center">Our Wedding Stories</div>
+    <h2 class="moments-title">Real <span>Indian Weddings</span> We've Made Magical</h2>
+  </div>
+  <div class="moments-scroll" id="momentsScroll">
+    <div class="moment-card mc1"><div class="moment-bg-pattern"></div><div class="moment-emoji">👑</div><div class="moment-info"><div class="moment-cat">📍 Rajasthan</div><div class="moment-name">Royal Rajputana Wedding</div><div class="moment-city">Udaipur Palace · 500 guests</div></div></div>
+    <div class="moment-card mc2"><div class="moment-bg-pattern"></div><div class="moment-emoji">🌸</div><div class="moment-info"><div class="moment-cat">📍 Maharashtra</div><div class="moment-name">Romantic Marathi Shaadi</div><div class="moment-city">Pune · 200 guests</div></div></div>
+    <div class="moment-card mc3"><div class="moment-bg-pattern"></div><div class="moment-emoji">🎶</div><div class="moment-info"><div class="moment-cat">📍 Punjab</div><div class="moment-name">Dhamakedar Punjabi Wedding</div><div class="moment-city">Amritsar · 800 guests</div></div></div>
+    <div class="moment-card mc4"><div class="moment-bg-pattern"></div><div class="moment-emoji">🏵️</div><div class="moment-info"><div class="moment-cat">📍 Tamil Nadu</div><div class="moment-name">Beautiful Tamil Kalyanam</div><div class="moment-city">Chennai · 400 guests</div></div></div>
+    <div class="moment-card mc5"><div class="moment-bg-pattern"></div><div class="moment-emoji">🌺</div><div class="moment-info"><div class="moment-cat">📍 Kerala</div><div class="moment-name">Serene Kerala Vivah</div><div class="moment-city">Kochi Backwaters · 250 guests</div></div></div>
+    <div class="moment-card mc6"><div class="moment-bg-pattern"></div><div class="moment-emoji">💐</div><div class="moment-info"><div class="moment-cat">📍 Delhi</div><div class="moment-name">Grand Delhi Destination</div><div class="moment-city">Leela Palace · 600 guests</div></div></div>
+    <div class="moment-card mc7"><div class="moment-bg-pattern"></div><div class="moment-emoji">🪔</div><div class="moment-info"><div class="moment-cat">📍 Gujarat</div><div class="moment-name">Vibrant Gujarati Lagan</div><div class="moment-city">Ahmedabad · 700 guests</div></div></div>
+    <div class="moment-card mc8"><div class="moment-bg-pattern"></div><div class="moment-emoji">✨</div><div class="moment-info"><div class="moment-cat">📍 Bengaluru</div><div class="moment-name">Modern Kannada Wedding</div><div class="moment-city">Bengaluru · 350 guests</div></div></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories-section" id="categories">
+  <div class="categories-header">
+    <div>
+      <div class="section-tag">Browse by Category</div>
+      <h2 class="section-title">Sabhi Vendors<br>Ek <span class="accent">Jagah Par</span></h2>
+    </div>
+    <a href="#" class="view-all-link">Sab Dekho →</a>
+  </div>
+  <div class="categories-grid reveal">
+    <div class="cat-card cc1"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">📸</span><div class="cat-name">Photography & Video</div><p class="cat-desc-small">Capture every laugh, tear & dance — with India's finest wedding storytellers.</p><div class="cat-pill">✦ 148 vendors</div></div></div>
+    <div class="cat-card cc2"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🌺</span><div class="cat-name">Mehendi Artists</div><div class="cat-pill">✦ 96 vendors</div></div></div>
+    <div class="cat-card cc3"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🏛️</span><div class="cat-name">Venues & Banquets</div><div class="cat-pill">✦ 72 vendors</div></div></div>
+    <div class="cat-card cc4"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🍛</span><div class="cat-name">Catering & Food</div><div class="cat-pill">✦ 115 vendors</div></div></div>
+    <div class="cat-card cc5"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🎶</span><div class="cat-name">Bands & DJ</div><div class="cat-pill">✦ 84 vendors</div></div></div>
+    <div class="cat-card cc6"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">💄</span><div class="cat-name">Bridal Makeup</div><div class="cat-pill">✦ 103 vendors</div></div></div>
+    <div class="cat-card cc7"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🪔</span><div class="cat-name">Décor & Lighting</div><div class="cat-pill">✦ 79 vendors</div></div></div>
+    <div class="cat-card cc8"><div class="cat-shimmer"></div><div class="cat-pattern-overlay"></div><div class="cat-arrow-btn">↗</div><div class="cat-content"><span class="cat-icon">🐴</span><div class="cat-name">Baraat & Transport</div><div class="cat-pill">✦ 41 vendors</div></div></div>
+  </div>
+</section>
+
+<!-- FEATURED VENDORS -->
+<section class="section vendors-section" id="vendors">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:0.5rem">
+    <div>
+      <div class="section-tag">Hand-Picked For You</div>
+      <h2 class="section-title">Top <span class="accent">Vendors</span> This Season</h2>
+    </div>
+    <button onclick="openModal('quoteModal')" class="btn-primary" style="border:none;cursor:pointer">💰 Request a Quote</button>
+  </div>
+
+  <div class="city-filter">
+    <button class="city-tab active" onclick="filterCity('all',this)">🗺️ All Cities</button>
+    <button class="city-tab" onclick="filterCity('delhi',this)">🏛️ Delhi</button>
+    <button class="city-tab" onclick="filterCity('mumbai',this)">🌊 Mumbai</button>
+    <button class="city-tab" onclick="filterCity('bangalore',this)">🌿 Bangalore</button>
+    <button class="city-tab" onclick="filterCity('jaipur',this)">🏰 Jaipur</button>
+  </div>
+
+  <div class="vendors-grid" id="vendorsGrid">
+    <div class="vendor-card reveal" data-city="delhi">
+      <div class="vendor-img vi1"><div class="vi-stripe"></div><div class="vi-badge">⭐ Top Rated</div><div class="vi-city-tag">📍 Delhi</div><span class="vi-icon">📸</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">📸 Photography</div>
+        <div class="vendor-name">Ravi Shankar Photography</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.9 · 312 reviews</span></div>
+        <p class="vendor-desc">Award-winning wedding photography across Delhi, Jaipur & Mumbai. Specialises in candid moments and cinematic reels.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹80,000</strong><br><span>per full day</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Ravi Shankar Photography')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vendor-card reveal" data-city="mumbai">
+      <div class="vendor-img vi2"><div class="vi-stripe"></div><div class="vi-badge">🔥 Most Booked</div><div class="vi-city-tag">📍 Mumbai</div><span class="vi-icon">🌺</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🌺 Mehendi</div>
+        <div class="vendor-name">Sunita Mehendi Studio</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.8 · 289 reviews</span></div>
+        <p class="vendor-desc">Intricate bridal mehendi, Rajasthani & Arabic patterns. Serving brides across Mumbai & Pune since 2010.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹15,000</strong><br><span>per bridal session</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Sunita Mehendi Studio')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vendor-card reveal" data-city="jaipur">
+      <div class="vendor-img vi3"><div class="vi-stripe"></div><div class="vi-badge">🎖️ Premium</div><div class="vi-city-tag">📍 Jaipur</div><span class="vi-icon">🎶</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🎶 Sangeet Band</div>
+        <div class="vendor-name">Dhol Dhamaka Band</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.9 · 406 reviews</span></div>
+        <p class="vendor-desc">Jaipur's most loved Baraat band. Dhol, trumpets, DJ & LED lights — we make your Baraat unforgettable!</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹45,000</strong><br><span>per event</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Dhol Dhamaka Band')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vendor-card reveal" data-city="bangalore">
+      <div class="vendor-img vi4"><div class="vi-stripe"></div><div class="vi-badge">✨ New</div><div class="vi-city-tag">📍 Bangalore</div><span class="vi-icon">💄</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">💄 Bridal Makeup</div>
+        <div class="vendor-name">Priya Glam Studio</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.7 · 178 reviews</span></div>
+        <p class="vendor-desc">South India's top bridal makeup artist. Traditional & contemporary looks, airbrush finish, HD photography-ready.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹25,000</strong><br><span>per bridal look</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Priya Glam Studio')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vendor-card reveal" data-city="mumbai">
+      <div class="vendor-img vi5"><div class="vi-stripe"></div><div class="vi-badge">🍛 Caterer</div><div class="vi-city-tag">📍 Mumbai</div><span class="vi-icon">🍛</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🍛 Catering</div>
+        <div class="vendor-name">Grand Feast Caterers</div>
+        <div class="vendor-meta"><span class="stars">★★★★☆</span><span>4.6 · 234 reviews</span></div>
+        <p class="vendor-desc">Multi-cuisine wedding catering for 100–2000 guests. Rajasthani, Punjabi, South Indian & continental menus available.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹700</strong><br><span>per plate</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Grand Feast Caterers')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vendor-card reveal" data-city="delhi">
+      <div class="vendor-img vi2"><div class="vi-stripe"></div><div class="vi-badge">🪔 Décor</div><div class="vi-city-tag">📍 Delhi</div><span class="vi-icon">🪔</span></div>
+      <div class="vendor-body">
+        <div class="vendor-tag">🪔 Décor & Lighting</div>
+        <div class="vendor-name">Royal Décor Events</div>
+        <div class="vendor-meta"><span class="stars">★★★★★</span><span>4.8 · 301 reviews</span></div>
+        <p class="vendor-desc">Luxury wedding décor, floral arrangements, LED lighting and stage design for grand Delhi weddings & farmhouses.</p>
+        <div class="vendor-footer">
+          <div class="vendor-price">From <strong>₹1,20,000</strong><br><span>full décor package</span></div>
+          <div class="vendor-actions">
+            <button class="vendor-btn-outline" onclick="openInquiry('Royal Décor Events')">📋 Inquire</button>
+            <button class="vendor-btn" onclick="openModal('quoteModal')">Get Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section" id="how">
+  <div style="text-align:center">
+    <div class="section-tag" style="color:var(--gold-bright);justify-content:center;margin-bottom:0.5rem">Simple Process</div>
+    <h2 class="section-title" style="color:white;margin-bottom:3rem">Kaise Kaam <span class="accent2">Karta Hai?</span></h2>
+  </div>
+  <div class="how-grid reveal">
+    <div class="how-step"><div class="step-num">01</div><div class="step-icon-wrap si1">🔍</div><div class="step-title">Search & Filter</div><p class="step-desc">Browse by city, budget, category & language. Find vendors for Hindu, Muslim, Sikh, Christian — all traditions.</p></div>
+    <div class="how-step"><div class="step-num">02</div><div class="step-icon-wrap si2">💬</div><div class="step-title">Send Inquiry</div><p class="step-desc">Send a direct inquiry to any vendor with your name, phone, wedding date & requirements. No middlemen.</p></div>
+    <div class="how-step"><div class="step-num">03</div><div class="step-icon-wrap si3">✅</div><div class="step-title">Get Quotes</div><p class="step-desc">Receive personalised quotes from multiple vendors. Compare & choose the best fit for your budget.</p></div>
+    <div class="how-step"><div class="step-num">04</div><div class="step-icon-wrap si4">🎉</div><div class="step-title">Shaadi Celebrate!</div><p class="step-desc">Your dream team shows up. You show up. Everyone dances. Memories are made for a lifetime. 🕺💃</p></div>
+  </div>
+</section>
+
+<!-- MUSIC BANNER -->
+<section class="music-section">
+  <div class="music-floating">
+    <div class="music-note mn1">🎵</div><div class="music-note mn2">🎶</div>
+    <div class="music-note mn3">🎸</div><div class="music-note mn4">🥁</div>
+    <div class="music-note mn5">🎺</div>
+  </div>
+  <div class="music-content reveal">
+    <div class="section-tag" style="color:var(--gold-bright);justify-content:center;margin-bottom:1rem">🎶 Entertainment</div>
+    <h2 class="music-title">Sangeet Ki <span>Raat</span> Ho Dhamakedar!</h2>
+    <p class="music-sub">From Bollywood DJs to classical Shehnai — we have every musical vibe for your big night</p>
+    <div class="music-items">
+      <div class="music-item">🥁 Dhol Players</div>
+      <div class="music-item">🎷 Brass Bands</div>
+      <div class="music-item">🎧 Bollywood DJs</div>
+      <div class="music-item">🎻 Classical Strings</div>
+      <div class="music-item">🎤 Live Singers</div>
+      <div class="music-item">🪘 Folk Artists</div>
+    </div>
+    <button onclick="openModal('quoteModal')" class="btn-secondary" style="border:none;cursor:pointer">🎶 Get Entertainment Quotes</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-section">
+  <div class="deco-flower df1">🌸</div><div class="deco-flower df2">🌺</div>
+  <div class="deco-flower df3">🏵️</div><div class="deco-flower df4">💐</div>
+  <div style="text-align:center;margin-bottom:0.5rem">
+    <div class="section-tag" style="justify-content:center">Real Love Stories</div>
+    <h2 class="section-title">Unke Dil Ki <span class="accent">Baat</span></h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-stars">★★★★★</div><div class="testi-city">📍 Delhi</div></div>
+      <p class="testi-quote">"WedVibe ne hamari shaadi ko sapno jaisi bana diya! Photographer, mehendi wali aur caterer — sab ek hi jagah se mile. Itna aasaan tha!"</p>
+      <div class="testi-author"><div class="testi-avatar ta1">💍</div><div><div class="testi-name">Priya & Rahul Sharma</div><div class="testi-wedding">Married Jan 2025 · Delhi NCR · 450 guests</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-stars">★★★★★</div><div class="testi-city">📍 Mumbai</div></div>
+      <p class="testi-quote">"The vendors on WedVibe are absolutely top class! Our Sangeet was planned in 3 days and it was the highlight of our entire wedding week!"</p>
+      <div class="testi-author"><div class="testi-avatar ta2">🎶</div><div><div class="testi-name">Ananya & Vikram Mehta</div><div class="testi-wedding">Married Mar 2025 · Mumbai · 600 guests</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-top"><div class="testi-stars">★★★★★</div><div class="testi-city">📍 Jaipur</div></div>
+      <p class="testi-quote">"Humne Udaipur mein destination wedding kiya aur WedVibe ke bina yeh possible nahi hota. Venue, catering, décor — sab perfect tha!"</p>
+      <div class="testi-author"><div class="testi-avatar ta3">🌺</div><div><div class="testi-name">Kavita & Arjun Singh</div><div class="testi-wedding">Married Feb 2025 · Udaipur · 800 guests</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK SECTION -->
+<section class="section feedback-section" id="feedback">
+  <div class="fb-deco">💬</div>
+  <div style="text-align:center;margin-bottom:2.5rem">
+    <div class="section-tag" style="justify-content:center">Share Your Experience</div>
+    <h2 class="section-title">Apna <span class="accent">Feedback</span> Dijiye</h2>
+    <p class="fb-subtitle">Your feedback helps us serve every couple better 🌸</p>
+  </div>
+  <div class="fb-card reveal">
+    <div class="fb-row">
+      <label class="modal-label">Rate Your Experience</label>
+      <div id="starRow">
+        <span class="star-btn" data-val="1">☆</span>
+        <span class="star-btn" data-val="2">☆</span>
+        <span class="star-btn" data-val="3">☆</span>
+        <span class="star-btn" data-val="4">☆</span>
+        <span class="star-btn" data-val="5">☆</span>
+      </div>
+    </div>
+    <div class="fb-row">
+      <label class="modal-label">Your Name</label>
+      <input id="fbName" type="text" placeholder="e.g. Priya & Rahul" class="fb-input"/>
+    </div>
+    <div class="fb-row">
+      <label class="modal-label">Your City</label>
+      <input id="fbCity" type="text" placeholder="e.g. Delhi, Mumbai, Jaipur..." class="fb-input"/>
+    </div>
+    <div class="fb-row">
+      <label class="modal-label">Your Feedback</label>
+      <textarea id="fbMsg" rows="4" placeholder="Tell us about your experience — what did you love? What can we improve?" class="fb-input"></textarea>
+    </div>
+    <button id="fbSubmit">🌸 Submit Feedback</button>
+    <div id="fbSuccess" class="fb-success">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem">🎉</div>
+      <div class="fb-success-title">Shukriya! Bahut Bahut Dhanyavaad!</div>
+      <div class="fb-success-sub">Your feedback has been recorded 🌸</div>
+    </div>
+    <div id="fbList"></div>
+  </div>
+</section>
+
+<!-- LEAD CAPTURE -->
+<section class="lead-section" id="lead">
+  <div class="lf lf1">🌺</div><div class="lf lf2">🌸</div>
+  <div class="lf lf3">🏵️</div><div class="lf lf4">💐</div>
+  <div class="lf lf5">🌼</div><div class="lf lf6">🌸</div>
+  <div class="lead-content reveal">
+    <div class="lead-badge">🪔 Shaadi Ki Taiyari Shuru Karo</div>
+    <h2 class="lead-title">Apni <span>Sapno Ki</span> Shaadi</h2>
+    <div class="lead-hindi">अपनी शादी को यादगार बनाएं 💍</div>
+    <p class="lead-sub">Join thousands of couples across India who planned their perfect wedding with WedVibe. Free to browse, free to connect.</p>
+    <div class="lead-form" id="leadFormWrap">
+      <input type="email" id="leadEmail" placeholder="📧 Apna email dalein..." />
+      <button type="button" id="leadBtn">Shuru Karo! 🌸</button>
+    </div>
+    <div id="leadSuccess" class="lead-success">
+      🎉 Welcome to the WedVibe family! Check your email 🌸
+    </div>
+    <div class="lead-trust">
+      <div class="trust-item">✅ 100% Free</div>
+      <div class="trust-item">🔒 Secure & Private</div>
+      <div class="trust-item">💬 WhatsApp Support</div>
+      <div class="trust-item">⭐ 4.9 Star Rated</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">🪔 Wed<span>Vibe</span></div>
+      <p class="footer-tagline">India's boldest wedding vendor marketplace. Apni shaadi ko yadgaar banao — from Kashmir to Kanyakumari. 🇮🇳</p>
+      <div class="footer-social">
+        <a class="soc-btn" href="#">in</a><a class="soc-btn" href="#">ig</a>
+        <a class="soc-btn" href="#">fb</a><a class="soc-btn" href="#">yt</a><a class="soc-btn" href="#">𝕏</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Vendors</h4>
+      <a href="#">Photography</a><a href="#">Mehendi Artists</a>
+      <a href="#">Venues & Banquets</a><a href="#">Catering</a>
+      <a href="#">Bands & DJ</a><a href="#">Bridal Makeup</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About WedVibe</a><a href="#">How It Works</a>
+      <a href="#">Blog</a><a href="#">Careers</a><a href="#">Press</a>
+    </div>
+    <div class="footer-col">
+      <h4>For Vendors</h4>
+      <a href="#">List Your Business</a><a href="#">Vendor Login</a>
+      <a href="#">Pricing Plans</a><a href="#">Help Center</a>
+      <a href="https://wa.me/916266396733" target="_blank">WhatsApp Us 💬</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 WedVibe India. Made with ❤️ for Indian Weddings 🇮🇳</span>
+    <div class="footer-bottom-right">
+      <a href="#">Privacy Policy</a><a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
